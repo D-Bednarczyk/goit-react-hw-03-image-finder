@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+import css from './styles.module.css';
 import Notiflix from 'notiflix';
 const axios = require('axios').default;
 const API_URL = 'https://pixabay.com/api/';
@@ -18,19 +20,8 @@ const fetchImgs = async (searchQuery, page) => {
   }
 };
 
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+export class App extends Component {
+  render() {
+    return <div className={css.App}>React homework template</div>;
+  }
+}
