@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import css from './styles.module.css';
 import Notiflix from 'notiflix';
+
+import { Searchbar } from './Searchbar';
 const axios = require('axios').default;
 const API_URL = 'https://pixabay.com/api/';
 const API_KEY = '36133466-dbc0c7a3178523b048b6e9d9a';
@@ -22,6 +24,10 @@ const fetchImgs = async (searchQuery, page) => {
 
 export class App extends Component {
   render() {
-    return <div className={css.App}>React homework template</div>;
+    return (
+      <div className={css.App}>
+        <Searchbar />
+      </div>
+    );
   }
 }
