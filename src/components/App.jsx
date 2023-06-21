@@ -23,10 +23,21 @@ const fetchImgs = async (searchQuery, page) => {
 };
 
 export class App extends Component {
+  state = {};
+
+  handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+
+    const input = form.elements.input.value;
+    console.log(fetchImgs(input, 1));
+    form.reset();
+  };
+
   render() {
     return (
       <div className={css.App}>
-        <Searchbar />
+        <Searchbar submitFunc={this.handleSubmit}></Searchbar>
       </div>
     );
   }
