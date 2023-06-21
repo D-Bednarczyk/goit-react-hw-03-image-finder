@@ -13,8 +13,8 @@ export const Searchbar = props => {
           className={css.SearchForminput}
           type="text"
           name="input"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
           placeholder="Search images and photos"
         />
       </form>
