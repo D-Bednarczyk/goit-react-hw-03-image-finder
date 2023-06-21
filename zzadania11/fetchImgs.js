@@ -17,3 +17,5 @@ export const fetchImgs = async (searchQuery, page) => {
     console.error('Error:' + error);
   }
 };
+
+//https://gist.github.com/michal-adam-kozlowski/4e561ae65f81d65e8c39ba0561b0ff6c/revisions
