@@ -30,7 +30,6 @@ export class App extends Component {
     const form = evt.currentTarget;
     const input = form.elements.input.value;
     this.setState({ searchQuery: input });
-    form.reset();
   };
 
   async componentDidUpdate(prevProps, prevState) {
