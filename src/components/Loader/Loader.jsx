@@ -1,13 +1,14 @@
-import { Audio } from 'react-loader-spinner';
+import { Discuss } from 'react-loader-spinner';
 
 export const Loader = () => (
-  <Audio
+  <Discuss
+    visible={true}
     height="80"
     width="80"
-    radius="9"
-    color="green"
-    ariaLabel="three-dots-loading"
-    wrapperStyle
-    wrapperClass
+    ariaLabel="comment-loading"
+    wrapperStyle={{}}
+    wrapperClass="comment-wrapper"
+    color="#fff"
+    backgroundColor="#F4442E"
   />
 );
