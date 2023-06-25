@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
-import css from './styles.module.css';
-import Notiflix from 'notiflix';
-import axios from 'axios';
-import { Searchbar } from './Searchbar';
+import css from './App.module.css';
 
-const API_URL = 'https://pixabay.com/api/';
-const API_KEY = '36133466-dbc0c7a3178523b048b6e9d9a';
-
-/* const fetchImgs = async (searchQuery, page) => {
-  try {
-    const response = await axios.get(
-      `${API_URL}?key=${API_KEY}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=12`
-    );
-    if (response.data.total === 0)
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-    return response;
-  } catch (error) {
-    console.error('Error:' + error);
-  }
-}; */
+import { fetchImgs } from './Service/fetchImgs';
+import { Searchbar } from '../Searchbar/Searchbar';
+import { Loader } from './Loader/Loader';
 
 export class App extends Component {
-  state = { searchQuery: '', page: 2, results: [], isLoading: false };
+  state = {
+    searchQuery: '',
+    page: 2,
+    results: [],
+    isLoading: false,
+    error: null,
+  };
 
   handleSubmit = evt => {
     evt.preventDefault();
@@ -33,20 +22,32 @@ export class App extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    const response = await axios.get(
-      `${API_URL}?key=${API_KEY}&q=${this.state.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.state.page}&per_page=12`
-    );
-    console.log(response);
-    if (
-      prevState.searchQuery !== this.state.searchQuery ||
-      prevState.page !== this.state.page
-    )
-      this.setState({ results: [response.data.hits] });
-    console.log(this.state.results);
+    try {
+      this.setState({ isLoading: true });
+      const response = await fetchImgs(this.state.searchQuery, this.state.page);
+      if (
+        prevState.searchQuery !== this.state.searchQuery ||
+        prevState.page !== this.state.page
+      )
+        this.setState({ results: [response.data.hits] });
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   }
 
   render() {
-    const { results } = this.state;
+    const { error, isLoading } = this.state;
+
+    if (error) {
+      return <div>Oops, something went wrong</div>;
+    }
+
+    if (isLoading) {
+      return <Loader />;
+    }
+
     return (
       <div className={css.App}>
         <Searchbar submitFunc={this.handleSubmit}></Searchbar>
