@@ -24,7 +24,7 @@ export class App extends Component {
     evt.preventDefault();
     const form = evt.currentTarget;
     const input = form.elements.input.value;
-    this.setState({ searchQuery: input, results: [] });
+    this.setState({ searchQuery: input, results: [], page: 1 });
   };
 
   componentDidUpdate(prevProps, prevState) {
