@@ -39,7 +39,7 @@ export class App extends Component {
     try {
       this.setState({ isLoading: true });
       const response = await fetchImgs(this.state.searchQuery, this.state.page);
-      console.log(response);
+
       this.setState(prevState => ({
         results: [...prevState.results, ...response.data.hits],
         max_pages: (response.data.total / 12).toFixed(0),
